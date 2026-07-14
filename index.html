@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마블 레이싱</title>
+<title>Marble Racing</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='felt' cx='50%25' cy='40%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23164a35'/%3E%3Cstop offset='100%25' stop-color='%2308281c'/%3E%3C/radialGradient%3E%3CradialGradient id='marble' cx='38%25' cy='32%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23f6dd8a'/%3E%3Cstop offset='55%25' stop-color='%23d4af37'/%3E%3Cstop offset='100%25' stop-color='%237a5c14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23felt)' stroke='%23d4af37' stroke-width='2.5'/%3E%3Cg stroke='%23d4af37' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='32' y1='3' x2='32' y2='9'/%3E%3Cline x1='32' y1='55' x2='32' y2='61'/%3E%3Cline x1='3' y1='32' x2='9' y2='32'/%3E%3Cline x1='55' y1='32' x2='61' y2='32'/%3E%3Cline x1='11.5' y1='11.5' x2='15.8' y2='15.8'/%3E%3Cline x1='48.2' y1='48.2' x2='52.5' y2='52.5'/%3E%3Cline x1='11.5' y1='52.5' x2='15.8' y2='48.2'/%3E%3Cline x1='48.2' y1='15.8' x2='52.5' y2='11.5'/%3E%3C/g%3E%3Ccircle cx='32' cy='33' r='15' fill='url(%23marble)' stroke='%237a5c14' stroke-width='1'/%3E%3Cellipse cx='27' cy='27' rx='4.5' ry='3' fill='%23fff6d9' opacity='0.75'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -255,6 +255,69 @@
   }
   .race-btn:hover{ border-color: var(--gold); background: rgba(212,175,55,0.08); transform: translateY(-3px); }
 
+  .race-btn .rank-tag{
+    position:absolute; top:-11px; left:50%; transform:translateX(-50%);
+    font-family:'Noto Sans KR', sans-serif;
+    font-size: 11px;
+    font-weight:700;
+    padding: 3px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    display:none;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  }
+
+  .race-btn.rank1{
+    border-color: var(--gold-bright);
+    background: rgba(212,175,55,0.14);
+    box-shadow: 0 0 0 2px rgba(212,175,55,0.3), 0 8px 20px rgba(212,175,55,0.15);
+  }
+  .race-btn.rank1 .rank-tag{
+    display:inline-block;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color: var(--ink);
+  }
+  .race-btn.rank1 .rank-tag::before{ content:"🥇 "; }
+
+  .race-btn.rank2{
+    border-color: #b9c2c9;
+    background: rgba(200,210,220,0.10);
+    box-shadow: 0 0 0 2px rgba(200,210,220,0.25), 0 8px 20px rgba(200,210,220,0.1);
+  }
+  .race-btn.rank2 .rank-tag{
+    display:inline-block;
+    background: linear-gradient(180deg, #e7ecef, #b9c2c9);
+    color: var(--ink);
+  }
+  .race-btn.rank2 .rank-tag::before{ content:"🥈 "; }
+
+  .confirm-rank-row{ display:flex; justify-content:center; margin: 4px 0 22px; }
+
+  .btn-confirm-rank{
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color: var(--ink);
+    border: none;
+    padding: 13px 42px;
+    font-family:'Noto Serif KR', serif;
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
+    cursor:pointer;
+    box-shadow: 0 8px 20px rgba(212,175,55,0.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-confirm-rank:hover{ transform: translateY(-2px); }
+  .btn-confirm-rank:disabled{
+    background:#3a3a3a; color:#888; box-shadow:none; cursor:not-allowed;
+  }
+
+  .rank-hint{
+    font-size: 12px;
+    color: var(--cream-dim);
+    margin-bottom: 22px;
+  }
+
   .back-link{
     background:none; border:none; color: var(--cream-dim); text-decoration:underline;
     cursor:pointer; font-size: 13px; margin-top: 6px;
@@ -284,33 +347,47 @@
   }
   @keyframes pop{ from{ transform: scale(0.92); opacity:0;} to{ transform:scale(1); opacity:1; } }
 
-  .modal .trophy{ font-size: 34px; margin-bottom: 6px; }
   .modal h2{
     font-family:'Noto Serif KR', serif;
     color: var(--gold-bright);
-    font-size: 22px;
-    margin: 0 0 4px;
+    font-size: 20px;
+    margin: 0 0 18px;
   }
-  .modal .win-name{
+
+  .rank-block{ margin-bottom: 20px; text-align:left; }
+  .rank-block:last-of-type{ margin-bottom: 22px; }
+
+  .rank-block-head{
+    display:flex; align-items:center; gap: 8px;
+    margin-bottom: 10px;
+  }
+  .rank-medal{ font-size: 20px; }
+  .rank-title{
     font-family:'Noto Serif KR', serif;
-    font-size: 26px;
+    font-size: 13px;
+    color: var(--cream-dim);
+    letter-spacing: 0.1em;
+  }
+  .rank-marble-name{
+    font-family:'Noto Serif KR', serif;
+    font-size: 20px;
     font-weight: 900;
     color: var(--gold-bright);
-    margin-bottom: 18px;
-    text-shadow: 0 0 12px rgba(212,175,55,0.4);
+    margin-left: auto;
+    text-shadow: 0 0 10px rgba(212,175,55,0.35);
   }
 
   .winner-list{
-    list-style:none; padding:0; margin: 0 0 22px;
-    display:flex; flex-direction:column; gap:8px;
-    max-height: 240px; overflow-y:auto;
+    list-style:none; padding:0; margin: 0;
+    display:flex; flex-direction:column; gap:7px;
+    max-height: 160px; overflow-y:auto;
   }
   .winner-list li{
     background: rgba(212,175,55,0.08);
     border: 1px solid rgba(212,175,55,0.25);
     border-radius: 8px;
-    padding: 10px;
-    font-size: 15px;
+    padding: 9px 10px;
+    font-size: 14px;
     color: var(--cream);
   }
   .winner-list .empty{
@@ -332,19 +409,6 @@
     letter-spacing: 0.04em;
   }
   .btn-confirm:hover{ filter: brightness(1.05); }
-
-  .new-round-wrap{ text-align:center; margin-top: 10px; display:none; }
-  .btn-newround{
-    background: transparent;
-    border: 1px solid var(--gold-dim);
-    color: var(--gold-bright);
-    padding: 10px 26px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor:pointer;
-    letter-spacing: 0.05em;
-  }
-  .btn-newround:hover{ border-color: var(--gold); background: rgba(212,175,55,0.08); }
 
   footer{
     text-align:center; margin-top: 50px;
@@ -371,7 +435,11 @@
 
   <section id="raceSection">
     <div class="race-q">어느 구슬이 먼저 도착했나요?</div>
+    <div class="rank-hint">첫 번째로 누른 구슬이 1등, 두 번째로 누른 구슬이 2등입니다 · 다시 누르면 선택이 취소됩니다</div>
     <div class="race-grid" id="raceGrid"></div>
+    <div class="confirm-rank-row">
+      <button class="btn-confirm-rank" id="confirmRankBtn" disabled>순위 확정</button>
+    </div>
     <button class="back-link" id="backBtn">← 배팅 다시 설정하기</button>
   </section>
 
@@ -380,10 +448,8 @@
 
 <div class="overlay" id="overlay">
   <div class="modal">
-    <div class="trophy">🏆</div>
-    <h2>우승 구슬</h2>
-    <div class="win-name" id="winName"></div>
-    <ul class="winner-list" id="winnerList"></ul>
+    <h2>🏁 이번 라운드 순위</h2>
+    <div id="rankResults"></div>
     <button class="btn-confirm" id="confirmBtn">확인</button>
   </div>
 </div>
@@ -398,9 +464,8 @@
   const raceSection = document.getElementById('raceSection');
   const startBtn = document.getElementById('startBtn');
   const backBtn = document.getElementById('backBtn');
+  const confirmRankBtn = document.getElementById('confirmRankBtn');
   const overlay = document.getElementById('overlay');
-  const winName = document.getElementById('winName');
-  const winnerList = document.getElementById('winnerList');
   const confirmBtn = document.getElementById('confirmBtn');
 
   let gameStarted = false;
@@ -493,9 +558,12 @@
       const rLabel = document.createElement('div');
       rLabel.dataset.role = 'race-label';
       rLabel.textContent = `구슬 ${NUMS[i]}`;
+      const rankTag = document.createElement('span');
+      rankTag.className = 'rank-tag';
+      rb.appendChild(rankTag);
       rb.appendChild(rBadge);
       rb.appendChild(rLabel);
-      rb.addEventListener('click', () => showWinner(i));
+      rb.addEventListener('click', () => toggleSelect(i));
       raceGrid.appendChild(rb);
     }
   }
@@ -517,35 +585,101 @@
 
   backBtn.addEventListener('click', () => {
     document.querySelectorAll('.name-input, .bettor-input').forEach(el => el.disabled = false);
+    ranking = [null, null];
+    updateRaceButtonsUI();
     gameStarted = false;
     raceSection.style.display = 'none';
     setupSection.style.display = 'block';
   });
 
-  function showWinner(index){
+  let ranking = [null, null]; // [1st place marble index, 2nd place marble index]
+
+  function toggleSelect(index){
+    if(ranking[0] === index){
+      ranking[0] = null;
+    } else if(ranking[1] === index){
+      ranking[1] = null;
+    } else if(ranking[0] === null){
+      ranking[0] = index;
+    } else if(ranking[1] === null){
+      ranking[1] = index;
+    } else {
+      return; // both ranks already filled, ignore extra clicks
+    }
+    updateRaceButtonsUI();
+  }
+
+  function updateRaceButtonsUI(){
+    raceGrid.querySelectorAll('.race-btn').forEach(btn => {
+      const idx = Number(btn.dataset.index);
+      btn.classList.remove('rank1', 'rank2');
+      const tag = btn.querySelector('.rank-tag');
+      if(ranking[0] === idx){ btn.classList.add('rank1'); tag.textContent = '1등'; }
+      else if(ranking[1] === idx){ btn.classList.add('rank2'); tag.textContent = '2등'; }
+    });
+    confirmRankBtn.disabled = ranking[0] === null;
+  }
+
+  function getBettors(index){
     const card = marbleGrid.querySelector(`.card[data-index="${index}"]`);
-    const nameVal = card.querySelector('.name-input').value.trim() || `구슬 ${NUMS[index]}`;
-    const bettors = Array.from(card.querySelectorAll('.bettor-input'))
+    return Array.from(card.querySelectorAll('.bettor-input'))
       .map(i => i.value.trim())
       .filter(v => v !== '');
+  }
 
-    winName.textContent = nameVal;
-    winnerList.innerHTML = '';
+  function getMarbleName(index){
+    const card = marbleGrid.querySelector(`.card[data-index="${index}"]`);
+    return card.querySelector('.name-input').value.trim() || `구슬 ${NUMS[index]}`;
+  }
+
+  function buildRankBlock(medal, title, index){
+    const block = document.createElement('div');
+    block.className = 'rank-block';
+
+    const head = document.createElement('div');
+    head.className = 'rank-block-head';
+    head.innerHTML = `<span class="rank-medal">${medal}</span><span class="rank-title">${title}</span>`;
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'rank-marble-name';
+    nameSpan.textContent = getMarbleName(index);
+    head.appendChild(nameSpan);
+
+    const list = document.createElement('ul');
+    list.className = 'winner-list';
+    const bettors = getBettors(index);
     if(bettors.length === 0){
       const li = document.createElement('li');
       li.className = 'empty';
       li.textContent = '이 구슬에 배팅한 사람이 없습니다';
-      winnerList.appendChild(li);
+      list.appendChild(li);
     } else {
       bettors.forEach(name => {
         const li = document.createElement('li');
         li.textContent = name;
-        winnerList.appendChild(li);
+        list.appendChild(li);
       });
+    }
+
+    block.appendChild(head);
+    block.appendChild(list);
+    return block;
+  }
+
+  function showRankResults(){
+    const rankResults = document.getElementById('rankResults');
+    rankResults.innerHTML = '';
+    rankResults.appendChild(buildRankBlock('🥇', '1등', ranking[0]));
+    if(ranking[1] !== null){
+      rankResults.appendChild(buildRankBlock('🥈', '2등', ranking[1]));
     }
     overlay.classList.add('show');
     confirmBtn.focus();
   }
+
+  confirmRankBtn.addEventListener('click', () => {
+    if(ranking[0] === null) return;
+    showRankResults();
+  });
 
   function closeModal(){
     overlay.classList.remove('show');
@@ -559,10 +693,11 @@
       list.appendChild(createBettorInput(list, false));
       card.querySelector('.name-input').disabled = false;
     });
+    ranking = [null, null];
+    updateRaceButtonsUI();
     gameStarted = false;
     raceSection.style.display = 'none';
     setupSection.style.display = 'block';
-    newRoundWrap.style.display = 'none';
   }
 
   confirmBtn.addEventListener('click', closeModal);
