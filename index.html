@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marble Racing</title>
+<title>구슬 레이싱 배팅 일지</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='felt' cx='50%25' cy='40%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23164a35'/%3E%3Cstop offset='100%25' stop-color='%2308281c'/%3E%3C/radialGradient%3E%3CradialGradient id='marble' cx='38%25' cy='32%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23f6dd8a'/%3E%3Cstop offset='55%25' stop-color='%23d4af37'/%3E%3Cstop offset='100%25' stop-color='%237a5c14'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='32' cy='32' r='30' fill='url(%23felt)' stroke='%23d4af37' stroke-width='2.5'/%3E%3Cg stroke='%23d4af37' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='32' y1='3' x2='32' y2='9'/%3E%3Cline x1='32' y1='55' x2='32' y2='61'/%3E%3Cline x1='3' y1='32' x2='9' y2='32'/%3E%3Cline x1='55' y1='32' x2='61' y2='32'/%3E%3Cline x1='11.5' y1='11.5' x2='15.8' y2='15.8'/%3E%3Cline x1='48.2' y1='48.2' x2='52.5' y2='52.5'/%3E%3Cline x1='11.5' y1='52.5' x2='15.8' y2='48.2'/%3E%3Cline x1='48.2' y1='15.8' x2='52.5' y2='11.5'/%3E%3C/g%3E%3Ccircle cx='32' cy='33' r='15' fill='url(%23marble)' stroke='%237a5c14' stroke-width='1'/%3E%3Cellipse cx='27' cy='27' rx='4.5' ry='3' fill='%23fff6d9' opacity='0.75'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
@@ -222,14 +222,14 @@
 
   .race-grid{
     display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-    max-width: 900px;
+    max-width: 560px;
     margin: 0 auto 30px;
   }
 
   @media (max-width: 480px){
-    .race-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .race-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .race-btn{ padding: 14px 4px; font-size: 13px; }
     .race-btn .r-badge{ width: 30px; height: 30px; margin-bottom: 6px; }
   }
@@ -322,6 +322,75 @@
     background:none; border:none; color: var(--cream-dim); text-decoration:underline;
     cursor:pointer; font-size: 13px; margin-top: 6px;
   }
+
+  .modal-question{
+    font-size: 16px;
+    color: var(--cream);
+    margin: 0 0 24px;
+    line-height: 1.5;
+  }
+
+  .modal-yesno-row{
+    display:flex; gap: 14px; justify-content:center;
+  }
+
+  .btn-yes{
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color: var(--ink);
+    border: none;
+    padding: 12px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor:pointer;
+  }
+  .btn-yes:hover{ filter: brightness(1.05); }
+
+  .btn-no{
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--cream);
+    padding: 12px 32px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor:pointer;
+  }
+  .btn-no:hover{ border-color: var(--gold); background: rgba(212,175,55,0.08); }
+
+  .mochi-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .mochi-btn{
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent);
+    border: 2px solid var(--gold-dim);
+    border-radius: 10px;
+    padding: 14px 6px;
+    cursor:pointer;
+    color: var(--cream);
+    font-family:'Noto Serif KR', serif;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all .15s ease;
+  }
+  .mochi-btn .m-badge{
+    width: 30px; height:30px; border-radius:50%; margin: 0 auto 8px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:900; color: var(--ink); font-size: 13px;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);
+  }
+  .mochi-btn:hover{ border-color: var(--gold); }
+  .mochi-btn.selected{
+    border-color: var(--gold-bright);
+    background: rgba(212,175,55,0.16);
+    box-shadow: 0 0 0 2px rgba(212,175,55,0.3);
+  }
+
+  .rank-block .rank-medal{ font-size: 20px; }
 
   /* ---------- Modal ---------- */
   .overlay{
@@ -422,7 +491,7 @@
   <header>
     <div class="kicker">Class Booth &middot; Table Log</div>
     <h1>구슬 레이싱 배팅 일지</h1>
-    <div class="sub">여섯 개의 구슬, 하나의 승자 — 배팅을 기록하세요</div>
+    <div class="sub">네 개의 구슬, 하나의 승자 — 배팅을 기록하세요</div>
     <div class="divider"></div>
   </header>
 
@@ -447,16 +516,12 @@
 </div>
 
 <div class="overlay" id="overlay">
-  <div class="modal">
-    <h2>🏁 이번 라운드 순위</h2>
-    <div id="rankResults"></div>
-    <button class="btn-confirm" id="confirmBtn">확인</button>
-  </div>
+  <div class="modal" id="modalCard"></div>
 </div>
 
 <script>
-  const NUMS = ['①','②','③','④','⑤','⑥'];
-  const COLORS = ['#c0392b','#2980b9','#2e9e5b','#8e44ad','#e0a628','#dfe4e8'];
+  const NUMS = ['①','②','③','④'];
+  const COLORS = ['#c0392b','#2980b9','#2e9e5b','#8e44ad'];
 
   const marbleGrid = document.getElementById('marbleGrid');
   const raceGrid = document.getElementById('raceGrid');
@@ -466,7 +531,7 @@
   const backBtn = document.getElementById('backBtn');
   const confirmRankBtn = document.getElementById('confirmRankBtn');
   const overlay = document.getElementById('overlay');
-  const confirmBtn = document.getElementById('confirmBtn');
+  const modalCard = document.getElementById('modalCard');
 
   let gameStarted = false;
 
@@ -545,7 +610,7 @@
   function init(){
     marbleGrid.innerHTML = '';
     raceGrid.innerHTML = '';
-    for(let i=0;i<6;i++){
+    for(let i=0;i<4;i++){
       marbleGrid.appendChild(buildMarbleCard(i));
 
       const rb = document.createElement('button');
@@ -632,6 +697,147 @@
     return card.querySelector('.name-input').value.trim() || `구슬 ${NUMS[index]}`;
   }
 
+  let modalStep = null; // 'ask' | 'select' | 'final'
+  let mochiSelected = new Set();
+
+  function renderAskMochi(){
+    modalStep = 'ask';
+    modalCard.innerHTML = '';
+
+    const h2 = document.createElement('h2');
+    h2.textContent = '🎱 모찌 나가요!';
+
+    const q = document.createElement('div');
+    q.className = 'modal-question';
+    q.textContent = '구슬이 있나요?';
+
+    const row = document.createElement('div');
+    row.className = 'modal-yesno-row';
+
+    const yesBtn = document.createElement('button');
+    yesBtn.className = 'btn-yes';
+    yesBtn.textContent = '예';
+    yesBtn.addEventListener('click', () => {
+      mochiSelected = new Set();
+      renderMochiSelect();
+    });
+
+    const noBtn = document.createElement('button');
+    noBtn.className = 'btn-no';
+    noBtn.textContent = '아니요';
+    noBtn.addEventListener('click', () => renderFinalResults());
+
+    row.appendChild(yesBtn);
+    row.appendChild(noBtn);
+
+    modalCard.appendChild(h2);
+    modalCard.appendChild(q);
+    modalCard.appendChild(row);
+
+    overlay.classList.add('show');
+    yesBtn.focus();
+  }
+
+  function renderMochiSelect(){
+    modalStep = 'select';
+    modalCard.innerHTML = '';
+
+    const h2 = document.createElement('h2');
+    h2.textContent = '🎱 모찌 구슬 선택';
+
+    const q = document.createElement('div');
+    q.className = 'modal-question';
+    q.textContent = '1등, 2등이 아닌 구슬 중 모찌로 나갈 구슬을 선택하세요';
+
+    const grid = document.createElement('div');
+    grid.className = 'mochi-grid';
+
+    const remaining = [0,1,2,3].filter(i => i !== ranking[0] && i !== ranking[1]);
+    remaining.forEach(i => {
+      const btn = document.createElement('button');
+      btn.className = 'mochi-btn';
+      if(mochiSelected.has(i)) btn.classList.add('selected');
+
+      const badge = document.createElement('div');
+      badge.className = 'm-badge';
+      badge.style.background = `linear-gradient(160deg, ${COLORS[i]}, ${shade(COLORS[i])})`;
+      badge.textContent = NUMS[i];
+
+      const label = document.createElement('div');
+      label.textContent = getMarbleName(i);
+
+      btn.appendChild(badge);
+      btn.appendChild(label);
+      btn.addEventListener('click', () => {
+        if(mochiSelected.has(i)) mochiSelected.delete(i);
+        else mochiSelected.add(i);
+        btn.classList.toggle('selected');
+      });
+      grid.appendChild(btn);
+    });
+
+    const doneBtn = document.createElement('button');
+    doneBtn.className = 'btn-confirm';
+    doneBtn.textContent = '선택 완료';
+    doneBtn.addEventListener('click', () => renderFinalResults());
+
+    modalCard.appendChild(h2);
+    modalCard.appendChild(q);
+    modalCard.appendChild(grid);
+    modalCard.appendChild(doneBtn);
+  }
+
+  function renderFinalResults(){
+    modalStep = 'final';
+    modalCard.innerHTML = '';
+
+    const h2 = document.createElement('h2');
+    h2.textContent = '🏁 이번 라운드 최종 결과';
+    modalCard.appendChild(h2);
+
+    modalCard.appendChild(buildRankBlock('🥇', '1등', ranking[0]));
+    if(ranking[1] !== null){
+      modalCard.appendChild(buildRankBlock('🥈', '2등', ranking[1]));
+    }
+    Array.from(mochiSelected).forEach(i => {
+      modalCard.appendChild(buildRankBlock('🎱', '모찌', i));
+    });
+
+    const confirmBtn = document.createElement('button');
+    confirmBtn.className = 'btn-confirm';
+    confirmBtn.textContent = '확인';
+    confirmBtn.addEventListener('click', closeModal);
+    modalCard.appendChild(confirmBtn);
+
+    overlay.classList.add('show');
+    confirmBtn.focus();
+  }
+
+  confirmRankBtn.addEventListener('click', () => {
+    if(ranking[0] === null) return;
+    renderAskMochi();
+  });
+
+  function closeModal(){
+    overlay.classList.remove('show');
+    startNewRound();
+  }
+
+  function startNewRound(){
+    document.querySelectorAll('#marbleGrid .card').forEach(card => {
+      const list = card.querySelector('[data-role="bettor-list"]');
+      list.innerHTML = '';
+      list.appendChild(createBettorInput(list, false));
+      card.querySelector('.name-input').disabled = false;
+    });
+    ranking = [null, null];
+    mochiSelected = new Set();
+    modalStep = null;
+    updateRaceButtonsUI();
+    gameStarted = false;
+    raceSection.style.display = 'none';
+    setupSection.style.display = 'block';
+  }
   function buildRankBlock(medal, title, index){
     const block = document.createElement('div');
     block.className = 'rank-block';
@@ -665,44 +871,8 @@
     return block;
   }
 
-  function showRankResults(){
-    const rankResults = document.getElementById('rankResults');
-    rankResults.innerHTML = '';
-    rankResults.appendChild(buildRankBlock('🥇', '1등', ranking[0]));
-    if(ranking[1] !== null){
-      rankResults.appendChild(buildRankBlock('🥈', '2등', ranking[1]));
-    }
-    overlay.classList.add('show');
-    confirmBtn.focus();
-  }
-
-  confirmRankBtn.addEventListener('click', () => {
-    if(ranking[0] === null) return;
-    showRankResults();
-  });
-
-  function closeModal(){
-    overlay.classList.remove('show');
-    startNewRound();
-  }
-
-  function startNewRound(){
-    document.querySelectorAll('#marbleGrid .card').forEach(card => {
-      const list = card.querySelector('[data-role="bettor-list"]');
-      list.innerHTML = '';
-      list.appendChild(createBettorInput(list, false));
-      card.querySelector('.name-input').disabled = false;
-    });
-    ranking = [null, null];
-    updateRaceButtonsUI();
-    gameStarted = false;
-    raceSection.style.display = 'none';
-    setupSection.style.display = 'block';
-  }
-
-  confirmBtn.addEventListener('click', closeModal);
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter' && overlay.classList.contains('show')){
+    if(e.key === 'Enter' && overlay.classList.contains('show') && modalStep === 'final'){
       e.preventDefault();
       closeModal();
     }
